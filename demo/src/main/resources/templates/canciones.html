@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Canciones</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background: #f0f0f0; }
+    </style>
+</head>
+<body>
+    <h1>Canciones</h1>
+    <p><a href="/canciones/nuevo">+ Nueva canción</a> | <a href="/artistas">Artistas</a></p>
+
+    <table>
+        <tr>
+            <th>ID</th><th>Título</th><th>Año</th><th>Género</th><th>Artista</th><th>Acciones</th>
+        </tr>
+        <tr th:each="c : ${canciones}">
+            <td th:text="${c.id}"></td>
+            <td th:text="${c.titulo}"></td>
+            <td th:text="${c.anio}"></td>
+            <td th:text="${c.genero}"></td>
+            <td th:text="${c.artista.nombre}"></td>
+            <td>
+                <a th:href="@{/canciones/editar/{id}(id=${c.id})}">Editar</a> |
+                <a th:href="@{/canciones/eliminar/{id}(id=${c.id})}"
+                   onclick="return confirm('¿Eliminar esta canción?')">Eliminar</a>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
